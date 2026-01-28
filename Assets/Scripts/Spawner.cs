@@ -8,6 +8,7 @@ public class Spawner : MonoBehaviour
 
     public Transform[] pathA; 
     public Transform[] pathB;
+    public Transform[] pathC;
 
     public float timeBetweenWaves = 2f;
 
@@ -27,7 +28,7 @@ public class Spawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        int randomChoice = Random.Range(0, 2); 
+        int randomChoice = Random.Range(0, 3); 
         
         Transform[] chosenPath;
 
@@ -35,9 +36,13 @@ public class Spawner : MonoBehaviour
         {
             chosenPath = pathA;
         }
-        else
+        else if (randomChoice == 1)
         {
             chosenPath = pathB;
+        }
+        else
+        {
+            chosenPath = pathC;
         }
 
         GameObject newEnemy = Instantiate(enemyPrefab, chosenPath[0].position, Quaternion.identity);
