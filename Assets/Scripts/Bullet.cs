@@ -3,8 +3,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private Transform target;
-    public float speed = 70f;
-    public int damage = 10;
+    public float speed = 60f;
+    public int damage = 3;
 
     public void Seek(Transform _target)
     {
@@ -27,11 +27,19 @@ public class Bullet : MonoBehaviour
             HitTarget();
             return;
         }
+
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
     }
 
     void HitTarget()
     {
+        // Sebzes az enemynek
+        EnemyMovement enemy = target.GetComponent<EnemyMovement>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(damage);
+        }
+
         Destroy(gameObject);
     }
 }

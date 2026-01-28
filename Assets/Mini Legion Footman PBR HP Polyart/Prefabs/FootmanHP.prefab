@@ -920,3 +920,5 @@ MonoBehaviour:
   waypoints: []
   speed: 5
   turnSpeed: 10
+  maxHealth: 4
+  coinReward: 10
