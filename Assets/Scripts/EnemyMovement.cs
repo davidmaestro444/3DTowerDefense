@@ -8,19 +8,21 @@ public class EnemyMovement : MonoBehaviour
     public float speed = 5f;
     public float turnSpeed = 10f;
     
-    private int waypointIndex = 0;
+    private int waypointIndex = 1;
 
     void Start()
     {
-        if (waypoints.Length > 0)
-        {
-            transform.position = waypoints[0].position;
-        }
     }
 
     void Update()
     {
-        if (waypointIndex >= waypoints.Length) return;
+        if (waypoints == null || waypoints.Length == 0) return;
+
+        if (waypointIndex >= waypoints.Length)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         Transform targetWaypoint = waypoints[waypointIndex];
 
@@ -35,7 +37,7 @@ public class EnemyMovement : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(transform.position, targetWaypoint.position, speed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, targetWaypoint.position) < 0.1f)
+        if (Vector3.Distance(transform.position, targetWaypoint.position) < 0.4f)
         {
             waypointIndex++;
         }
