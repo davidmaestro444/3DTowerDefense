@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [Header("Coin Settings")]
-    public int startingCoins = 100;
+    public int startingCoins = 200;
     public int currentCoins;
     public TextMeshProUGUI coinText;
 
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     {
         if (coinText != null)
         {
-            coinText.text = "COIN: " + currentCoins;
+            coinText.text = "Coin: " + currentCoins;
         }
     }
 
