@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -70,4 +71,28 @@ public class GameManager : MonoBehaviour
         // Kirajzolas a jobb felso sarokba
         GUI.Label(new Rect(Screen.width - 200, 10, 200, 50), "COIN: " + currentCoins, style);
     }*/
+
+    [Header("Game Over Settings")]
+    public GameObject gameOverUI;
+    public bool isGameEnded = false;
+
+    public void GameOver()
+    {
+        if (isGameEnded) return;
+
+        isGameEnded = true;
+        Debug.Log("GAME OVER!");
+        Time.timeScale = 0f;
+
+        if (gameOverUI != null)
+        {
+            gameOverUI.SetActive(true);
+        }
+    }
+
+    public void Retry()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

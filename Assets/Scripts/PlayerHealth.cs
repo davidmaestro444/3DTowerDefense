@@ -2,11 +2,26 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public static int Lives;
-    public int startLives = 20;
+    public static PlayerHealth Instance;
 
-    void Start()
+    public int health = 20;
+
+    void Awake()
     {
-        Lives = startLives;
+        Instance = this;
+    }
+
+    public void TakeDamage(int amount)
+    {
+        if (GameManager.Instance.isGameEnded) return;
+
+        health -= amount;
+        if (health < 0) health = 0;
+        Debug.Log("Bázis sérült! Élet: " + health);
+
+        if (health <= 0)
+        {
+            GameManager.Instance.GameOver(); 
+        }
     }
 }

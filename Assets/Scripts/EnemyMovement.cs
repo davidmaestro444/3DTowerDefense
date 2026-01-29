@@ -71,17 +71,11 @@ public class EnemyMovement : MonoBehaviour
 
     void EndPath()
     {
-        if (PlayerHealth.Lives > 0) 
+        if (PlayerHealth.Instance != null)
         {
-            PlayerHealth.Lives--; 
-            Debug.Log("Ellenség bejutott! Hátralévő élet: " + PlayerHealth.Lives);
+            PlayerHealth.Instance.TakeDamage(1);
         }
 
-        if (PlayerHealth.Lives <= 0)
-        {
-            Debug.Log("GAME OVER!"); 
-        }
-
-        Destroy(gameObject); 
+        Destroy(gameObject);
     }
 }
