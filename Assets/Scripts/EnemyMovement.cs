@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -12,10 +10,22 @@ public class EnemyMovement : MonoBehaviour
     public int maxHealth = 4;
     private int currentHealth;
 
-    [Header("Coin Reward")]
+    [Header("Damage & Reward")]
+    public int damageToPlayer = 1;
     public int coinReward = 10;
 
+    [Header("Enemy Type")]
+    public EnemyType enemyType = EnemyType.Soldier;
+
     private int waypointIndex = 1;
+
+    public enum EnemyType
+    {
+        Soldier,
+        Wizard,
+        Grunt,
+        Golem
+    }
 
     void Start()
     {
@@ -28,7 +38,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (waypointIndex >= waypoints.Length)
         {
-            EndPath(); 
+            EndPath();
             return;
         }
 
@@ -52,7 +62,6 @@ public class EnemyMovement : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
         if (currentHealth <= 0)
         {
             Die();
@@ -61,11 +70,19 @@ public class EnemyMovement : MonoBehaviour
 
     void Die()
     {
+        // Coin jutalom
         if (GameManager.Instance != null)
         {
             GameManager.Instance.AddCoins(coinReward);
         }
-        Debug.Log("Ellenség meghalt! +" + coinReward + " coin");
+
+        // Spawner ertesitese a halálárol
+        if (Spawner.Instance != null)
+        {
+            Spawner.Instance.EnemyKilled(enemyType);
+        }
+
+        Debug.Log(enemyType + " meghalt! +" + coinReward + " coin");
         Destroy(gameObject);
     }
 
@@ -73,9 +90,8 @@ public class EnemyMovement : MonoBehaviour
     {
         if (PlayerHealth.Instance != null)
         {
-            PlayerHealth.Instance.TakeDamage(1);
+            PlayerHealth.Instance.TakeDamage(damageToPlayer);
         }
-
         Destroy(gameObject);
     }
 }
