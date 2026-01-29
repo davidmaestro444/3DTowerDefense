@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -7,6 +8,7 @@ public class GameManager : MonoBehaviour
     [Header("Coin Settings")]
     public int startingCoins = 100;
     public int currentCoins;
+    public TextMeshProUGUI coinText;
 
     void Awake()
     {
@@ -23,11 +25,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         currentCoins = startingCoins;
+        UpdateCoinUI();
     }
 
     public void AddCoins(int amount)
     {
         currentCoins += amount;
+        UpdateCoinUI();
         Debug.Log("+" + amount + " coin! Osszes: " + currentCoins);
     }
 
@@ -36,6 +40,7 @@ public class GameManager : MonoBehaviour
         if (currentCoins >= amount)
         {
             currentCoins -= amount;
+            UpdateCoinUI();
             return true;
         }
         else
@@ -45,8 +50,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void UpdateCoinUI()
+    {
+        if (coinText != null)
+        {
+            coinText.text = "COIN: " + currentCoins;
+        }
+    }
+
     // Ez rajzolja ki a kepernyon - Canvas nelkul!
-    void OnGUI()
+    /*void OnGUI()
     {
         // Stilus beallitasa
         GUIStyle style = new GUIStyle();
@@ -56,5 +69,5 @@ public class GameManager : MonoBehaviour
 
         // Kirajzolas a jobb felso sarokba
         GUI.Label(new Rect(Screen.width - 200, 10, 200, 50), "COIN: " + currentCoins, style);
-    }
+    }*/
 }

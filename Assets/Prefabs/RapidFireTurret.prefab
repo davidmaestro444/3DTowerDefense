@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1234526783146875764}
   - component: {fileID: 8179944766246810547}
   - component: {fileID: 7212499474579546754}
+  - component: {fileID: 2854079290809532192}
   m_Layer: 0
   m_Name: RapidFireTurret
   m_TagString: Untagged
@@ -112,6 +113,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.046263, y: 1.2207489, z: 1.020031}
   m_Center: {x: 0, y: 0.47576332, z: 0}
+--- !u!114 &2854079290809532192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508706532598016360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad1e304f1d0111b40ad3c8bd24c129d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Turret
+  range: 8
+  fireRate: 1
+  turnSpeed: 10
+  partToRotate: {fileID: 2722357120210264637}
+  bulletPrefab: {fileID: 2828978306764934936, guid: 92139756630bc044bb6cd1ac2dc00cf6, type: 3}
+  firePoint: {fileID: 7616671647106066375}
 --- !u!1 &6322411949579527081
 GameObject:
   m_ObjectHideFlags: 0
