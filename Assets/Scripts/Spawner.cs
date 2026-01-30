@@ -30,7 +30,6 @@ public class Spawner : MonoBehaviour
     public int killsToUnlockGrunt = 10;
     public int killsToUnlockGolem = 10;
 
-    // Melyik enemy tipusok aktívak
     private bool wizardUnlocked = false;
     private bool gruntUnlocked = false;
     private bool golemUnlocked = false;
@@ -56,10 +55,8 @@ public class Spawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        // Utvonal valasztasa
         Transform[] chosenPath = GetRandomPath();
 
-        // Enemy tipus valasztasa
         GameObject enemyPrefab = ChooseEnemyType();
 
         if (enemyPrefab == null)
@@ -68,7 +65,6 @@ public class Spawner : MonoBehaviour
             return;
         }
 
-        // Spawn
         GameObject newEnemy = Instantiate(enemyPrefab, chosenPath[0].position, Quaternion.identity);
         EnemyMovement movement = newEnemy.GetComponent<EnemyMovement>();
         if (movement != null)
@@ -91,26 +87,20 @@ public class Spawner : MonoBehaviour
 
     GameObject ChooseEnemyType()
     {
-        // Osszes elerheto enemy tipus listaja
         var availableEnemies = new System.Collections.Generic.List<GameObject>();
 
-        // Soldier mindig elerheto
         if (soldierPrefab != null)
             availableEnemies.Add(soldierPrefab);
 
-        // Wizard ha unlock-olva
         if (wizardUnlocked && wizardPrefab != null)
             availableEnemies.Add(wizardPrefab);
 
-        // Grunt ha unlock-olva
         if (gruntUnlocked && gruntPrefab != null)
             availableEnemies.Add(gruntPrefab);
 
-        // Golem ha unlock-olva
         if (golemUnlocked && golemPrefab != null)
             availableEnemies.Add(golemPrefab);
 
-        // Random valasztas
         if (availableEnemies.Count > 0)
         {
             return availableEnemies[Random.Range(0, availableEnemies.Count)];
@@ -119,7 +109,6 @@ public class Spawner : MonoBehaviour
         return soldierPrefab;
     }
 
-    // Ezt hivja meg az EnemyMovement amikor meghal
     public void EnemyKilled(EnemyMovement.EnemyType type)
     {
         switch (type)

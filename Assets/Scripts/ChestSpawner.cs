@@ -45,7 +45,6 @@ public class ChestSpawner : MonoBehaviour
     {
         if (chestPrefab == null) return;
 
-        // Ures helyek gyujtese
         List<ChestPlace> emptyPlaces = new List<ChestPlace>();
 
         foreach (ChestPlace place in ChestPlace.AllPlaces)
@@ -62,19 +61,15 @@ public class ChestSpawner : MonoBehaviour
             return;
         }
 
-        // Random hely valasztasa
         currentPlace = emptyPlaces[Random.Range(0, emptyPlaces.Count)];
         currentPlace.hasChest = true;
 
-        // Pozicio es rotacio
         Vector3 spawnPos = currentPlace.transform.position + new Vector3(0, yOffset, 0);
         Quaternion spawnRot = Quaternion.Euler(chestRotation);
 
-        // Chest letrehozasa
         currentChest = Instantiate(chestPrefab, spawnPos, spawnRot);
         currentChest.transform.localScale = Vector3.one * chestScale;
 
-        // TreasureChest script
         TreasureChest chestScript = currentChest.GetComponent<TreasureChest>();
         if (chestScript != null)
         {

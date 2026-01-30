@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class ChestPlace : MonoBehaviour
 {
-    // Statikus lista az osszes ChestPlace-rol
     public static List<ChestPlace> AllPlaces = new List<ChestPlace>();
 
     public bool hasChest = false;
@@ -18,7 +17,6 @@ public class ChestPlace : MonoBehaviour
         AllPlaces.Remove(this);
     }
 
-    // Scene nezetben lathatova teszi a poziciot
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;

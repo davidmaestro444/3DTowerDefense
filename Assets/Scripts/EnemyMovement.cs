@@ -70,13 +70,11 @@ public class EnemyMovement : MonoBehaviour
 
     void Die()
     {
-        // Coin jutalom
         if (GameManager.Instance != null)
         {
             GameManager.Instance.AddCoins(coinReward);
         }
 
-        // Spawner ertesitese a halálárol
         if (Spawner.Instance != null)
         {
             Spawner.Instance.EnemyKilled(enemyType);
