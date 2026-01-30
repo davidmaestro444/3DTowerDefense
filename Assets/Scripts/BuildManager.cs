@@ -1,8 +1,11 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class BuildManager : MonoBehaviour
 {
     public static BuildManager Instance;
+    public UpgradeUI upgradeUI;
+    private TurretPlace selectedNode;
 
     void Awake()
     {
@@ -11,10 +14,20 @@ public class BuildManager : MonoBehaviour
 
     private TurretBlueprint turretToBuild;
     public bool CanBuild { get { return turretToBuild != null; } }
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            DeselectNode();
+            turretToBuild = null;
+            UpdateAllTurretPlaces(false);
+        }
+    }
 
     public void SelectTurretToBuild(TurretBlueprint turret)
     {
         turretToBuild = turret;
+        DeselectNode();
         UpdateAllTurretPlaces(true);
     }
 
@@ -22,7 +35,6 @@ public class BuildManager : MonoBehaviour
     {
         if (GameManager.Instance.currentCoins < turretToBuild.cost)
         {
-            Debug.Log("Nincs eleg penz!");
             return;
         }
 
@@ -40,6 +52,26 @@ public class BuildManager : MonoBehaviour
         {
             place.SetHighlight(active);
         }
+    }
+
+    public void SelectNode(TurretPlace node)
+    {
+        if (selectedNode == node)
+        {
+            DeselectNode();
+            return;
+        }
+
+        selectedNode = node;
+        turretToBuild = null;
+
+        upgradeUI.SetTarget(node);
+    }
+
+    public void DeselectNode()
+    {
+        selectedNode = null;
+        upgradeUI.Hide();
     }
 }
 

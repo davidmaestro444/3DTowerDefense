@@ -109,7 +109,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1.046263, y: 1.2207489, z: 1.020031}
   m_Center: {x: 0, y: 0.47576332, z: 0}
@@ -131,6 +131,10 @@ MonoBehaviour:
   partToRotate: {fileID: 2722357120210264637}
   bulletPrefab: {fileID: 2828978306764934936, guid: 92139756630bc044bb6cd1ac2dc00cf6, type: 3}
   firePoint: {fileID: 7616671647106066375}
+  damage: 2
+  upgradeCost: 60
+  fireRateBooster: 0.5
+  isUpgraded: 0
 --- !u!1 &6322411949579527081
 GameObject:
   m_ObjectHideFlags: 0

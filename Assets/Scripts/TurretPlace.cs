@@ -44,6 +44,11 @@ public class TurretPlace : MonoBehaviour
     void OnMouseDown()
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
+        if (turret != null)
+        {
+            BuildManager.Instance.SelectNode(this);
+            return;
+        }
         if (!BuildManager.Instance.CanBuild) return;
         if (turret != null) return;
 

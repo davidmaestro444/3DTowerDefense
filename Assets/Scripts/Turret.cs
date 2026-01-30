@@ -8,14 +8,25 @@ public class Turret : MonoBehaviour
     public Transform partToRotate;
     public GameObject bulletPrefab;
     public Transform firePoint;
-
     private Transform target;
     private float fireCountdown = 0f;
     private string enemyTag = "Enemy";
+    public int damage = 2;
+    public int upgradeCost = 60;
+    public float fireRateBooster = 0.5f;
+    public bool isUpgraded = false;
 
     void Start()
     {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
+    }
+
+    public void UpgradeTurret()
+    {
+        if (isUpgraded) return;
+        damage += 2;
+        fireRate += fireRateBooster;
+        isUpgraded = true;
     }
 
     void UpdateTarget()
@@ -69,6 +80,7 @@ public class Turret : MonoBehaviour
         Bullet bullet = bulletGO.GetComponent<Bullet>();
         if (bullet != null)
         {
+            bullet.damage = this.damage;
             bullet.Seek(target);
         }
     }
