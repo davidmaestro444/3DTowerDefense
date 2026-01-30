@@ -46,7 +46,7 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnRoutine()
     {
-        while (true)
+        while (!GameManager.Instance.isGameEnded)
         {
             SpawnEnemy();
             yield return new WaitForSeconds(timeBetweenWaves);
@@ -146,6 +146,10 @@ public class Spawner : MonoBehaviour
             case EnemyMovement.EnemyType.Golem:
                 golemKills++;
                 Debug.Log("Golem kills: " + golemKills);
+                if (golemKills >= 5)
+                {
+                    GameManager.Instance.WinGame();
+                }
                 break;
         }
     }
