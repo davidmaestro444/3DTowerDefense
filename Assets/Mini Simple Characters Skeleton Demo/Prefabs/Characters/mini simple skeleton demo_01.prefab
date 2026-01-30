@@ -458,7 +458,7 @@ MonoBehaviour:
   maxHealth: 4
   damageToPlayer: 1
   coinReward: 10
-  enemyType: 0
+  enemyType: 2
 --- !u!1 &3190320679450232660
 GameObject:
   m_ObjectHideFlags: 0
