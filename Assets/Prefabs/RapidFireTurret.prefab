@@ -130,7 +130,8 @@ MonoBehaviour:
   turnSpeed: 10
   partToRotate: {fileID: 2722357120210264637}
   bulletPrefab: {fileID: 2828978306764934936, guid: 92139756630bc044bb6cd1ac2dc00cf6, type: 3}
-  firePoint: {fileID: 7616671647106066375}
+  firePoints:
+  - {fileID: 7616671647106066375}
   damage: 2
   upgradeCost: 60
   fireRateBooster: 0.5

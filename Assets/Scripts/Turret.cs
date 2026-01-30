@@ -7,7 +7,7 @@ public class Turret : MonoBehaviour
     public float turnSpeed = 10f;
     public Transform partToRotate;
     public GameObject bulletPrefab;
-    public Transform firePoint;
+    public Transform[] firePoints;
     private Transform target;
     private float fireCountdown = 0f;
     private string enemyTag = "Enemy";
@@ -76,12 +76,16 @@ public class Turret : MonoBehaviour
 
     void Shoot()
     {
-        GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        Bullet bullet = bulletGO.GetComponent<Bullet>();
-        if (bullet != null)
+        foreach (Transform fp in firePoints)
         {
-            bullet.damage = this.damage;
-            bullet.Seek(target);
+            GameObject bulletGO = Instantiate(bulletPrefab, fp.position, fp.rotation);
+            Bullet bullet = bulletGO.GetComponent<Bullet>();
+
+            if (bullet != null)
+            {
+                bullet.damage = this.damage;
+                bullet.Seek(target);
+            }
         }
     }
 
